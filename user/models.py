@@ -1,6 +1,6 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
-from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.contrib.auth.models import AbstractUser
 
 LEVEL = ((0, "Beginner"), (1, "Intermediate"), (2, "Advanced"))
 
@@ -14,9 +14,6 @@ class User(AbstractUser):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
-    # Specify custom related_name arguments to avoid clashes
-    groups = models.ManyToManyField(Group, related_name='custom_user_groups')
-    user_permissions = models.ManyToManyField(Permission, related_name='custom_user_permissions')
 
     class Meta:
         ordering = ["created_on"]
