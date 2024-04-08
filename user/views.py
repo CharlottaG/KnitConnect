@@ -27,13 +27,13 @@ def add_profile(request):
                 request, messages.SUCCESS,
                 'Congratulations! Your profile has been added.'
             )
-            return redirect('user_profile', slug=profile.slug)
+            return redirect('user_profile', slug=user.slug)
     else:
         profile_form = ProfileForm()
 
     return render(
         request,
-        "profiles/add_profile.html",
+        "user/add_profile.html",
         {
             "profile_form": profile_form
         },
@@ -41,6 +41,6 @@ def add_profile(request):
 
 
 def user_profile(request, slug):
-    profile = get_object_or_404(User, slug=slug)
-    return render(request, 'user_profile.html', {'user': user})
+    user = get_object_or_404(User, slug=slug)
+    return render(request, 'user/profile_details.html', {'user': user})
 
