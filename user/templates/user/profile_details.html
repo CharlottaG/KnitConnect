@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<!--  content starts here -->
+
+<div class="container px-4 py-5 cols-2">
+    <div class="card mb-3" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{ user.profile_picture.url }}" alt="{{ user.created_by }}" class="img-fluid rounded-start">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{user.created_by}}</h5>
+            <p class="card-text">{{user.bio}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- content ends here -->
+
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- index.html content starts here -->
+<div class="container px-4 py-5 row-cols-2">
+    <h1>The Knit Connect</h1>
+    <p>Welcome to the Knit Connect, your cozy corner of the internet dedicated to all things knitting! Whether you're a
+        seasoned pro or just picking up your first set of needles, our community is here to inspire, educate, and celebrate
+        the art of knitting. Dive into a world of beautiful patterns, helpful tutorials, and vibrant discussions, and join
+        us in creating something truly special, one stitch at a time. Start your knitting journey with us today!</p>
+    <div>
+        <img src="{% static 'images/background-home.webp' %}" style="width: 300px; height: 200px;" alt="Background image of yarns and a needle">
+    </div>  
+</div> 
+
+<!-- index.html content ends here -->
+{% endblock %}

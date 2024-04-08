@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<!-- content starts here -->
+
+<div class="container px-4 py-5">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form">
+                {% if user.is_authenticated %}
+                <h2>Profile page</h2>
+                <form id="ProfileForm" method="POST" style="margin-top: 1.3em;" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    {% crispy profile_form %}
+                    <button id="add_profile" type="submit" class="btn btn-primary btn-sm">Submit</button>
+                </form>
+                </form>
+                {% else %}
+                <p>You must be logged in to add your profile</p>
+                {% endif %}
+                <!-- Display message -->
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  content ends here -->
+
+{% endblock content %}
+
