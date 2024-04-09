@@ -19,4 +19,4 @@ class User(AbstractUser):
         ordering = ["created_on"]
 
     def __str__(self):
-        return f"Profile for {self.username}"
+        return f"{self.username}"

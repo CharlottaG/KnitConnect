@@ -16,28 +16,33 @@ class ProfilesList(generic.ListView):
     #paginate_by = 6
 
 def add_profile(request):
-    if request.method == "POST":
-        print(request.POST)
-        profile_form = ProfileForm(data=request.POST)
-        if profile_form.is_valid():
-            profile = profile_form.save(commit=False)
-            profile.created_by = request.user
-            profile.save()
-            messages.add_message(
-                request, messages.SUCCESS,
-                'Congratulations! Your profile has been added.'
-            )
-            return redirect('user_profile', slug=user.slug)
-    else:
-        profile_form = ProfileForm()
+    if request.user.is_authenticated:
+        # Check if the user already has a profile
+        if hasattr(request.user, 'profile'):
+            # User already has a profile, redirect them there
+            return redirect('user_profile', slug=request.user.profile.slug)
+        
+        if request.method == "POST":
+            profile_form = ProfileForm(data=request.POST)
+            if profile_form.is_valid():
+                profile = profile_form.save(commit=False)
+                profile.user = request.user
+                profile.save()
+                messages.add_message(
+                    request, messages.SUCCESS,
+                    'Congratulations! Your profile has been added.'
+                )
+                return redirect('user_profile', slug=profile.slug)
+        else:
+            profile_form = ProfileForm()
 
-    return render(
-        request,
-        "user/add_profile.html",
-        {
-            "profile_form": profile_form
-        },
-    )
+        return render(
+            request,
+            "user/add_profile.html",
+            {
+                "profile_form": profile_form
+            },
+        )
 
 
 def user_profile(request, slug):

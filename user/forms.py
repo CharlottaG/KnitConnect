@@ -12,4 +12,5 @@ class ProfileForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()  
         self.helper.form_method = 'post' 
+        self.helper.form_enctype = 'multipart/form-data'  # Enctype for file uploads
         self.helper.add_input(Submit('submit', 'Save'))

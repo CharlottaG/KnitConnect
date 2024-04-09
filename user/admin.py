@@ -8,5 +8,4 @@ class UserAdmin(SummernoteModelAdmin):
 
     list_display = ('username', 'slug')
     search_fields = ['username']
-    prepopulated_fields = {'slug': ('username',)}
     summernote_fields = ('bio',)
