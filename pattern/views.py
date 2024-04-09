@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from .models import Pattern, Comment
 from .forms import CommentForm, PatternForm
 from django.forms import ModelForm
+from django.utils.text import slugify
 
 
 class PatternList(generic.ListView):
@@ -18,8 +19,7 @@ class PatternList(generic.ListView):
 
 @login_required
 def pattern_details(request, slug):
-    queryset = Pattern.objects.filter(status=1)
-    pattern = get_object_or_404(queryset, slug=slug)
+    pattern = get_object_or_404(Pattern, slug=slug)
     comments = pattern.comments.all().order_by("-created_on")
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST)
@@ -51,8 +51,7 @@ def comment_edit(request, slug, comment_id):
 
     if request.method == "POST":
 
-        queryset = Pattern.objects.filter(status=1)
-        post = get_object_or_404(queryset, slug=slug)
+        post = get_object_or_404(Pattern, slug=slug)
         comment = get_object_or_404(Comment, pk=comment_id)
         comment_form = CommentForm(data=request.POST, instance=comment)
 
@@ -70,8 +69,7 @@ def comment_edit(request, slug, comment_id):
 
 @login_required
 def comment_delete(request, slug, comment_id):
-    queryset = Pattern.objects.filter(status=1)
-    post = get_object_or_404(queryset, slug=slug)
+    post = get_object_or_404(Pattern, slug=slug)
     comment = get_object_or_404(Comment, pk=comment_id)
 
     if comment.author == request.user:
@@ -91,6 +89,7 @@ def add_pattern(request):
         if pattern_form.is_valid():
             pattern = pattern_form.save(commit=False)
             pattern.created_by = request.user
+            pattern.slug = slugify(pattern.pattern_name)
             pattern.save()
             messages.success(request, 'Your pattern was added successfully!')
             return redirect('patterns')

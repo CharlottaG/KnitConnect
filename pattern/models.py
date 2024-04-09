@@ -4,7 +4,6 @@ from cloudinary.models import CloudinaryField
 from django.utils.text import slugify
 
 
-STATUS = ((0, "Draft"), (1, "Published"))
 LEVEL = ((0, "Beginner"), (1, "Intermediate"), (2, "Advanced"))
 
 class Pattern(models.Model):
@@ -18,7 +17,6 @@ class Pattern(models.Model):
     yarn = models.CharField(max_length=100, default="yarn")
     difficulity_level = models.IntegerField(choices=LEVEL,)
     created_on = models.DateTimeField(auto_now_add=True)
-    status = models.IntegerField(choices=STATUS, default=0)
 
     class Meta:
         ordering = ["created_on"]
