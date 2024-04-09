@@ -1,12 +1,13 @@
+from .models import Pattern
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-from .models import User
+from .models import Pattern
 
-class ProfileForm(forms.ModelForm):
+class PatternForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ['bio', 'difficulity_level', 'profile_picture']
+        model = Pattern
+        fields = ['pattern_name', 'description', 'featured_image', 'difficulity_level', 'needle_size', 'yarn', 'gauge']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

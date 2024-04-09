@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- pattern_list.html content starts here -->
+
+<div class="container px-4 py-5" id="custom-cards">
+    <h2 class="pb-2 border-bottom">Patterns</h2>
+    <a href="#" class="btn btn-primary">Add Pattern</a>
+    <div class="row row-cols-3 row-cols-lg-3 align-items-stretch g-4 py-5">
+    <!-- Pattern cards -->
+    {% for pattern in object_list %}
+    <div class="col mb-4">
+        <div class="card card-cover overflow-hidden text-bg-dark rounded-4 shadow-lg"
+            style="background-image: url('{{ pattern.featured_image.url }}'); background-size: cover; background-position: center; margin-bottom: 20px;">
+            <div class="d-flex flex-column p-5 pb-3 text-white text-shadow-1">
+                <h3 class="pt-5 mt-5 display-7 lh-1 fw-bold">{{ pattern.pattern_name }}</h3>
+                <h4 class="mb-4">by {{ pattern.created_by }}</h4>
+                <ul class="d-flex list-unstyled mt-auto">
+                    <li class="d-flex align-items-center me-3">
+                        <small><strong>Difficulty level:</strong> {{ pattern.difficulity_level }}</small>
+                    </li>
+                    <li class="d-flex align-items-center me-3">
+                        <small><strong>Gauge:</strong> {{ pattern.gauge }}</small>
+                    </li>
+                    <li class="d-flex align-items-center me-3">
+                        <small><strong>Needle size:</strong> {{ pattern.needle_size }}</small>
+                    </li>
+                </ul>
+                <ul class="d-flex list-unstyled mt-auto">
+                    <li class="d-flex align-items-center">
+                        <small><a href="#">View pattern</a></small>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- pattern_list.html content ends here -->
+{% endblock %}
+
+    
