@@ -27,3 +27,18 @@ class Pattern(models.Model):
 
     def __str__(self):
         return f"{self.pattern_name} | by {self.created_by}"
+
+
+class Comment(models.Model):
+    pattern = models.ForeignKey(Pattern, on_delete=models.CASCADE,
+                             related_name="comments")
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="commenter")
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["created_on"]
+
+    def __str__(self):
+        return f"Comment {self.body} by {self.author}"
