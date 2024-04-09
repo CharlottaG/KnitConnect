@@ -59,7 +59,6 @@ def comment_edit(request, slug, comment_id):
         if comment_form.is_valid() and comment.author == request.user:
             comment = comment_form.save(commit=False)
             comment.post = post
-            #comment.approved = True
             comment.save()
             messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
         else:
@@ -93,8 +92,9 @@ def add_pattern(request):
             pattern = pattern_form.save(commit=False)
             pattern.created_by = request.user
             pattern.save()
-            return redirect('pattern_detail', pk=pattern.pk)
             messages.success(request, 'Your pattern was added successfully!')
+            return redirect('patterns')
+        
     else:
         pattern_form = PatternForm()
     
