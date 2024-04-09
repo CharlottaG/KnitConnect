@@ -1,6 +1,7 @@
 from django.db import models
 from user.models import User
 from cloudinary.models import CloudinaryField
+from autoslug import AutoSlugField
 
 
 STATUS = ((0, "Draft"), (1, "Published"))
@@ -8,8 +9,8 @@ LEVEL = ((0, "Beginner"), (1, "Intermediate"), (2, "Advanced"))
 
 class Pattern(models.Model):
     pattern_name = models.CharField(max_length=200, unique=True)
-    slug = models.SlugField(max_length=200, unique=True)
-    description = models.CharField(max_length=200, default="description")
+    slug = AutoSlugField(unique=True, populate_from='pattern_name')
+    description = models.TextField(default="description")
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="patterncreator")
     featured_image = CloudinaryField('image', default='placeholder')
     needle_size = models.CharField(max_length=100)

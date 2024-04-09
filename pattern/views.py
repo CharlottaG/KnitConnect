@@ -5,6 +5,7 @@ from django.views.generic import TemplateView, View
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import Pattern
+from .forms import PatternForm
 
 
 # Create your views here.
@@ -19,11 +20,12 @@ def add_pattern(request):
         pattern_form = PatternForm(request.POST, request.FILES)
         if pattern_form.is_valid():
             pattern = pattern_form.save(commit=False)
-            pattern.author = request.user
+            pattern.created_by = request.user
             pattern.save()
-            return render(request, 'patterns/success.html')
+            pattern_form = PatternForm()
             messages.success(request, 'Your pattern was added successfully!')
+            return redirect('patterns')
     else:
         pattern_form = PatternForm()
     
-    return render(request, "patterns/add_pattern.html", {'pattern_form': pattern_form})
+    return render(request, "pattern/add_pattern.html", {'pattern_form': pattern_form})

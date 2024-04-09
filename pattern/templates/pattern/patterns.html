@@ -6,7 +6,7 @@
 
 <div class="container px-4 py-5" id="custom-cards">
     <h2 class="pb-2 border-bottom">Patterns</h2>
-    <a href="#" class="btn btn-primary">Add Pattern</a>
+    <a href="{% url 'add_pattern' %}" class="btn btn-primary">Add Pattern</a>
     <div class="row row-cols-3 row-cols-lg-3 align-items-stretch g-4 py-5">
     <!-- Pattern cards -->
     {% for pattern in object_list %}
