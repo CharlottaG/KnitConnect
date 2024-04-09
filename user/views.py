@@ -3,6 +3,7 @@ from django.views import generic
 from django.views.generic.detail import DetailView
 from django.views.generic import TemplateView, View
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.forms import ModelForm
@@ -15,6 +16,7 @@ class ProfilesList(generic.ListView):
     template_name = "user/profiles_list.html"
     #paginate_by = 6
 
+@login_required
 def add_profile(request):
     if request.user.is_authenticated:
         # Check if the user already has a profile
@@ -23,11 +25,11 @@ def add_profile(request):
             return redirect('user_profile', slug=request.user.profile.slug)
         
         if request.method == "POST":
-            profile_form = ProfileForm(data=request.POST)
+            profile_form = ProfileForm(request.POST, request.FILES)
             if profile_form.is_valid():
                 profile = profile_form.save(commit=False)
                 profile.user = request.user
-                profile.save()
+                profile.save() 
                 messages.add_message(
                     request, messages.SUCCESS,
                     'Congratulations! Your profile has been added.'
