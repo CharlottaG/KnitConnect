@@ -29,7 +29,9 @@
                 </ul>
                 <ul class="d-flex list-unstyled mt-auto">
                     <li class="d-flex align-items-center">
+                        {% if pattern.slug %}
                         <small><a href="{% url 'pattern_details' slug=pattern.slug %}">View pattern</a></small>
+                        {% endif %}
                     </li>
                 </ul>
             </div>

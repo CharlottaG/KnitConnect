@@ -22,7 +22,7 @@ def add_profile(request):
         # Check if the user already has a profile
         if hasattr(request.user, 'profile'):
             # User already has a profile, redirect them there
-            return redirect('user_profile', slug=request.user.profile.slug)
+            return reverse('user_profile', username=request.user.profile.username)
         
         if request.method == "POST":
             profile_form = ProfileForm(request.POST, request.FILES)
@@ -34,7 +34,7 @@ def add_profile(request):
                     request, messages.SUCCESS,
                     'Congratulations! Your profile has been added.'
                 )
-                return redirect('user_profile', slug=profile.slug)
+                return redirect('user_profile', username=profile.username)
         else:
             profile_form = ProfileForm()
 
@@ -46,8 +46,7 @@ def add_profile(request):
             },
         )
 
-
-def user_profile(request, slug):
-    user = get_object_or_404(User, slug=slug)
+def user_profile(request, username):
+    user = get_object_or_404(User, username=username)
     return render(request, 'user/profile_details.html', {'user': user})
 
