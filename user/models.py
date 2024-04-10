@@ -6,6 +6,7 @@ LEVEL = ((0, "Beginner"), (1, "Intermediate"), (2, "Advanced"))
 
 class User(AbstractUser):
     username = models.CharField(max_length=200, unique=True)
+    userprofile = models.CharField(max_length=100, blank=True)
     bio = models.CharField(max_length=200, null=True, blank=True, unique=False,
                            default="Write some words about yourself.")
     profile_picture = CloudinaryField('image', default='https://res.cloudinary.com/dehwhmatn/image/upload/v1712673845/placeholder_palitb')

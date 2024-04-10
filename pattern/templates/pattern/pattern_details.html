@@ -26,6 +26,17 @@
                 </div>
             </div>
         </div>
+        <!-- Liking pattern -->
+        <div class="liking_pattern">
+            {% if user.is_authenticated %}
+            {% if request.user in pattern.likes.all %}
+            <a href="{% url 'like_pattern' slug=pattern.slug %}">Unlike</a>
+            {% else %}
+            <a href="{% url 'like_pattern' slug=pattern.slug %}">Like</a>
+            {% endif %}
+            {% endif %}
+            <p class="card-text">Number of Likes: {{ like_count }}</p>
+        </div>
 
         <div class="border p-3" id="comments">
             <!-- Creating New Comments -->

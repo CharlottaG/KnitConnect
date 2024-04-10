@@ -17,6 +17,7 @@ class Pattern(models.Model):
     yarn = models.CharField(max_length=100, default="yarn")
     difficulity_level = models.IntegerField(choices=LEVEL,)
     created_on = models.DateTimeField(auto_now_add=True)
+    likes = models.ManyToManyField(User, related_name='liked_patterns', blank=True)
 
     class Meta:
         ordering = ["created_on"]
@@ -43,5 +44,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment {self.body} by {self.author}"
+
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pattern = models.ForeignKey(Pattern, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 

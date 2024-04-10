@@ -4,8 +4,8 @@ from django.views import generic
 from django.views.generic.detail import DetailView
 from django.views.generic import TemplateView, View
 from django.contrib import messages
-from django.http import HttpResponseRedirect
-from .models import Pattern, Comment
+from django.http import HttpResponseRedirect, HttpResponseBadRequest
+from .models import Pattern, Comment, Like
 from .forms import CommentForm, PatternForm
 from django.forms import ModelForm
 from django.utils.text import slugify
@@ -16,11 +16,15 @@ class PatternList(generic.ListView):
     template_name = "pattern/patterns.html"
     paginate_by = 6
 
+def my_page(request):
+    return render(request, 'pattern/my_page.html')
+
 
 @login_required
 def pattern_details(request, slug):
     pattern = get_object_or_404(Pattern, slug=slug)
     comments = pattern.comments.all().order_by("-created_on")
+
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
@@ -35,13 +39,17 @@ def pattern_details(request, slug):
     
     comment_form = CommentForm()
 
+    # Count the number of likes for the pattern
+    like_count = pattern.likes.count()
+
     return render(
         request,
         'pattern/pattern_details.html',
         {
             "pattern": pattern,
             "comments": comments,
-            "comment_form": comment_form
+            "comment_form": comment_form,
+            "like_count": like_count, 
         },
     )
 
@@ -98,3 +106,17 @@ def add_pattern(request):
         pattern_form = PatternForm()
     
     return render(request, "pattern/add_pattern.html", {'pattern_form': pattern_form})
+
+
+@login_required
+def like_pattern(request, slug):
+    pattern = get_object_or_404(Pattern, slug=slug)
+    like, created = Like.objects.get_or_create(user=request.user, pattern=pattern)
+
+    if created:
+        like.delete()
+        messages.success(request, "You've liked this pattern.")
+    else:
+        messages.error(request, "You've already liked this pattern.")
+    
+        return redirect('pattern_details', slug=slug)

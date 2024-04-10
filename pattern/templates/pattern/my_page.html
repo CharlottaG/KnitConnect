@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<!-- content starts here -->
+<div class="container px-4 py-5 cols-2">
+    <div class="mb-3" style="max-width: 540px;">
+        <h2>Welcome {{ user.username }} to your page</h2>
+        <p>Patterns I like</p>
+        <p>Patterns I created</p>
+        <p>What I will knit:</p>
+    </div>
+</div>
+
+
+<!-- content ends here -->
+
+{% endblock content %}
