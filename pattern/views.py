@@ -20,10 +20,10 @@ def my_page(request):
     return render(request, 'pattern/my_page.html')
 
 
-@login_required
+#@login_required
 def pattern_details(request, slug):
     pattern = get_object_or_404(Pattern, slug=slug)
-    comments = pattern.comments.all().order_by("-created_on")
+    comments = Comment.objects.filter(pattern=pattern).order_by("-created_on")
 
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST)
@@ -103,6 +103,8 @@ def add_pattern(request):
             return redirect('patterns')
         
     else:
+        # Form is invalid; display error messages
+        messages.error(request, 'Please correct the errors in the form.')
         pattern_form = PatternForm()
     
     return render(request, "pattern/add_pattern.html", {'pattern_form': pattern_form})
@@ -114,7 +116,6 @@ def like_pattern(request, slug):
     like, created = Like.objects.get_or_create(user=request.user, pattern=pattern)
 
     if created:
-        like.delete()
         messages.success(request, "You've liked this pattern.")
     else:
         messages.error(request, "You've already liked this pattern.")

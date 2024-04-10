@@ -12,7 +12,7 @@
             <div class="form">
                 {% if user.is_authenticated %}
                 <h2>Add Pattern</h2>
-                <form id="patternForm" method="POST" style="margin-top: 1.3em;">
+                <form id="patternForm" method="POST" style="margin-top: 1.3em;" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% crispy pattern_form %}
                 </form>
