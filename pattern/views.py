@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.forms import ModelForm
 from django.utils.text import slugify
 from django.http import JsonResponse
-from .models import Pattern, Comment
+from .models import Pattern, Comment, ProjectList
 from .forms import CommentForm, PatternForm
 
 
@@ -49,7 +49,7 @@ def pattern_details(request, slug):
             "pattern": pattern,
             "comments": comments,
             "comment_form": comment_form,
-            "like_count": like_count, 
+            "like_count": like_count,
         },
     )
 
@@ -123,23 +123,55 @@ def like_pattern(request, slug):
 
     return HttpResponseRedirect(reverse('pattern_details', args=[slug]))
 
+
+@login_required
+def add_to_project_list(request, slug):
+    pattern = get_object_or_404(Pattern, slug=slug)
+    user = request.user
+    project_list, _ = ProjectList.objects.get_or_create(user=user)
+    
+    if pattern in project_list.patterns.all():
+        messages.error(request, 'Pattern is already in your project list.')
+    else:
+        project_list.patterns.add(pattern)
+        messages.success(request, 'Pattern added to your project list.')
+    
+    return HttpResponseRedirect(reverse('pattern_details', args=[slug]))
+
+
 def my_page(request):
     user = request.user
     pattern_names = get_liked_pattern_names(user)
     my_patterns = get_pattern_created_by(user)
-    return render(request, 'pattern/my_page.html', {'pattern_names': pattern_names, 'my_patterns': my_patterns})
+    project_patterns = get_added_to_list(user)
+    return render(
+        request, 
+        'pattern/my_page.html', 
+        {
+            'pattern_names': pattern_names, 
+            'my_patterns': my_patterns, 
+            'project_patterns': project_patterns
+        })
+
 
 def get_liked_pattern_names(user):
     liked_patterns = Pattern.objects.filter(likes=user)
     pattern_names_and_slugs = [(pattern.pattern_name, pattern.slug) for pattern in liked_patterns]
     return pattern_names_and_slugs
 
+
 def get_pattern_created_by(user):
     my_patterns = Pattern.objects.filter(created_by=user)
     pattern_names_and_slugs = [(pattern.pattern_name, pattern.slug) for pattern in my_patterns]
     return pattern_names_and_slugs
 
-    
-    
-    
-   
+
+def get_added_to_list(user):
+    project_list = ProjectList.objects.filter(user=user).first()
+    if project_list:
+        pattern_names_and_slugs = [(pattern.pattern_name, pattern.slug) for pattern in project_list.patterns.all()]
+        return pattern_names_and_slugs
+    else:
+        return []
+
+  

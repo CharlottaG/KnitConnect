@@ -54,3 +54,8 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment {self.body} by {self.author}"
+
+
+class ProjectList(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    patterns = models.ManyToManyField(Pattern, related_name='project_lists')

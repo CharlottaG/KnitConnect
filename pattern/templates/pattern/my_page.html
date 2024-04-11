@@ -9,29 +9,38 @@
     <div class="mb-3" style="max-width: 540px;">
         <h2>Welcome {{ user.username }} to your page</h2>
         <div class="pattern-list patterns-like">
-        <strong>Patterns I like:</strong>
-        <ul>
-            {% for pattern_name, pattern_slug in pattern_names %}
-            <li>
-                <a href="{% url 'pattern_details' slug=pattern_slug %}">{{ pattern_name }}</a>
-            </li>
-            {% endfor %}
-        </ul>
+            <strong>Patterns I like:</strong>
+            <ul>
+                {% for pattern_name, pattern_slug in pattern_names %}
+                <li>
+                    <a href="{% url 'pattern_details' slug=pattern_slug %}">{{ pattern_name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="pattern-list patterns-created">
+            <strong>Patterns I created:</strong>
+            <ul>
+                {% for pattern_name, pattern_slug in my_patterns %}
+                <li>
+                    <a href="{% url 'pattern_details' slug=pattern_slug %}">{{ pattern_name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="pattern-list patterns-to-knit">
+            <strong>What I will knit:</strong>
+                {% if project_patterns %}
+                <ul>
+                    {% for pattern_name, slug in project_patterns %}
+                    <li><a href="{% url 'pattern_details' slug=slug %}">{{ pattern_name }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No patterns in your project list yet.</p>
+                {% endif %}
+        </div>
     </div>
-    <div class="pattern-list patterns-created">
-        <strong>Patterns I created:</strong>
-        <ul>
-            {% for pattern_name, pattern_slug in my_patterns %}
-            <li>
-                <a href="{% url 'pattern_details' slug=pattern_slug %}">{{ pattern_name }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="pattern-list patterns-to-knit">
-        <strong>What I will knit:</strong>
-    </div>
-</div>
 </div>
 
 
