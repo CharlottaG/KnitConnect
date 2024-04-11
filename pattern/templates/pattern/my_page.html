@@ -4,16 +4,15 @@
 {% block content %}
 
 <!-- content starts here -->
+
 <div class="container px-4 py-5 cols-2">
     <div class="mb-3" style="max-width: 540px;">
         <h2>Welcome {{ user.username }} to your page</h2>
         <p>Patterns I like:</p>
         <ul>
-            {% for pattern in patterns %}
-            <li>{{ pattern.pattern_name }}
-                {% if pattern.slug %}
-                <a href="{% url 'pattern_details' slug=pattern.slug %}">View pattern</a>
-                {% endif %}
+            {% for pattern_name, pattern_slug in pattern_names %}
+            <li>
+                <a href="{% url 'pattern_details' slug=pattern_slug %}">{{ pattern_name }}</a>
             </li>
             {% endfor %}
         </ul>

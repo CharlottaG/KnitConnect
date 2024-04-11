@@ -19,9 +19,6 @@ class PatternList(generic.ListView):
     template_name = "pattern/patterns.html"
     paginate_by = 6
 
-def my_page(request):
-    return render(request, 'pattern/my_page.html')
-
 
 #@login_required
 def pattern_details(request, slug):
@@ -126,9 +123,16 @@ def like_pattern(request, slug):
 
     return HttpResponseRedirect(reverse('pattern_details', args=[slug]))
 
+def my_page(request):
+    user = request.user
+    pattern_names = get_liked_pattern_names(user)
+    return render(request, 'pattern/my_page.html', {'pattern_names': pattern_names})
 
-#@login_required
-#def liked_patterns(request):
-#    liked_patterns = Like.objects.filter(user=request.user).values_list('pattern', flat=True)
-#    patterns = Pattern.objects.filter(id__in=liked_patterns)
-#    return render(request, 'pattern/my_page.html', {'patterns': patterns})
+def get_liked_pattern_names(user):
+    liked_patterns = Pattern.objects.filter(likes=user)
+    pattern_names_and_slugs = [(pattern.pattern_name, pattern.slug) for pattern in liked_patterns]
+    return pattern_names_and_slugs
+    
+    
+    
+   
