@@ -29,15 +29,6 @@
                     </div>
                 </div>
 
-        <!--- Edit/Delet buttons  -->
-        <div>         
-                {% if user.is_authenticated and pattern.creator == user %}
-                <button class="btn btn-secondary btn-sm btn-edit"
-                    pattern_slug="{{ pattern.slug }}">Edit</button>
-                <button class="btn btn-danger btn-sm btn-delete"
-                    pattern_slug="{{ pattern.slug }}">Delete</button>
-                {% endif %}
-        </div>
             <!-- Liking pattern -->
             <div class="row">
                 <div class="liking_pattern col px-4 mb-4 mt-3">

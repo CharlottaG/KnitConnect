@@ -179,39 +179,3 @@ def get_added_to_list(user):
         return pattern_names_and_slugs
     else:
         return []
-
-# Edit/Delete pattern
-
-@login_required
-def pattern_edit(request, slug):
-
-    if request.method == "POST":
-
-        post = get_object_or_404(Pattern, slug=slug)
-        pattern = get_object_or_404(Pattern)
-        pattern_form = PatternForm(data=request.POST, instance=pattern)
-
-        if pattern_form.is_valid() and pattern.created_by == request.user:
-            pattern = pattern_form.save(commit=False)
-            pattern.post = post
-            pattern.save()
-            messages.add_message(request, messages.SUCCESS, 'Pattern Updated!')
-        else:
-            messages.add_message(request, messages.ERROR,
-                                 'Error updating pattern!')
-
-    return HttpResponseRedirect(reverse('pattern_details', args=[slug]))
-
-
-@login_required
-def pattern_delete(request, slug):
-    pattern = get_object_or_404(Pattern, slug=slug)
-
-    if pattern.created_by == request.user:
-        pattern.delete()
-        messages.add_message(request, messages.SUCCESS, 'Pattern deleted!')
-    else:
-        messages.add_message(request, messages.ERROR,
-                             'You can only delete your own pattern!')
-
-    return HttpResponseRedirect(reverse('patterns'))
