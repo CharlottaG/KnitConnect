@@ -1,3 +1,29 @@
+/** My page styling **/
+
+.pattern-list {
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.patterns-like {
+    background-color: rgb(15, 230, 230, 0.8);
+}
+
+.patterns-created {
+    background-color: rgb(7, 131, 131, 0.8);
+}
+
+.patterns-to-knit {
+    background-color: rgb(1, 63, 63, 0.8);
+
+/** Background image on pattern overview page**/
+.darkened-img {
+        background-image: linear-gradient(rgba(10, 78, 96, 0.5), rgba(0, 0, 0, 0.5)), url('image.jpg');
+}
+
+/** Footer **/
+
 footer {
     background-color: rgb(13, 223, 223);
 }
