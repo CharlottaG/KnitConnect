@@ -5,108 +5,101 @@
 {% block content %}
 
 <!-- pattern_details.html content starts here -->
-<div class="container px-4 py-5 cols-2">
-    <div class="card mb-3" style="max-width: 540px;">
-
-        <!-- Displaying pattern -->
-
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src=" {{ pattern.featured_image.url }}" alt="{{ pattern.pattern_name }}"
-                            class="img-fluid rounded-start">
+<div class="container px-4 py-5 cols-2" style="max-width: 800px;">
+    <div class="row g-0">
+        <div class="card text-center">
+            <div class="card-header">
+                <div>
+                    <img src="{{ pattern.featured_image.url }}" alt="{{ pattern.pattern_name }}" class="img-fluid rounded-start" style="width: 100%;">
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{pattern.pattern_name}} | <small class="text-body-secondary">by
+                        {{pattern.created_by}}</h5>
+                <div class="row">
+                    <div class="liking_pattern col px-4 mb-4 mt-3">
+                        {% if user.is_authenticated %}
+                        {% if request.user in pattern.likes.all %}
+                        <a href="{% url 'like_pattern' slug=pattern.slug %}">Unlike</a>
+                        {% else %}
+                        <a href="{% url 'like_pattern' slug=pattern.slug %}">Like</a>
+                        {% endif %}
+                        {% endif %}
+                        <div><i class="fa-solid fa-thumbs-up"></i> {{ pattern.likes.count }}</div>
                     </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{pattern.pattern_name}} | <small class="text-body-secondary">by
-                                    {{pattern.created_by}}</small></h5>
-                            <p class="card-text">{{pattern.description}}</p>
-                            <p class="card-text"><em>Difficulty level:</em> {{ pattern.get_difficulty_level_display }}
-                                <br><em>Needle size:</em> {{pattern.needle_size}}
-                                <br><em>Yarn:</em> {{pattern.yarn}}
-                                <br><em>Gauge:</em> {{pattern.gauge}}
-                            </p>
-                        </div>
-                    </div>
                 </div>
-
-            <!-- Liking pattern -->
-            <div class="row">
-                <div class="liking_pattern col px-4 mb-4 mt-3">
-                    {% if user.is_authenticated %}
-                    {% if request.user in pattern.likes.all %}
-                    <a href="{% url 'like_pattern' slug=pattern.slug %}">Unlike</a>
-                    {% else %}
-                    <a href="{% url 'like_pattern' slug=pattern.slug %}">Like</a>
-                    {% endif %}
-                    {% endif %}
-                    <div><i class="fa-solid fa-thumbs-up"></i> {{ pattern.likes.count }}</div>
-                </div>
-            </div>
-
-            <!-- Add to project list -->
-            <div class="row">
-                <div class="add_to_project_list col px-4 mb-4 mt-3">
-                    {% if user.is_authenticated %}
-                    {% if pattern in user.projectlist.patterns.all %}
-                    <p>Already in your project list</p>
-                    {% else %}
-                    <form action="{% url 'add_to_project_list' slug=pattern.slug %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit">Add to Project List</button>
-                    </form>
-                    {% endif %}
-                    {% endif %}
-                </div>
-            </div>
-            <!-- Creating New Comments -->
-            <div class="col mb-4 mt-3">
-                <div class="card-body">
-                    {% if user.is_authenticated %}
-                    <h5>Leave a comment:</h5>
-                    <p>Posting as: {{ user.username }}</p>
-                    <form id="commentForm" method="post" style="margin-top: 1.3em;">
-                        {{ comment_form | crispy }}
-                        {% csrf_token %}
-                        <button id="submitButton" type="submit" class="btn btn-success btn-sm">Submit</button>
-                    </form>
-                    {% else %}
-                    <p>Log in to leave a comment</p>
-                    {% endif %}
-                </div>
-            </div>
-
-            <!-- Displaying Comments -->
-            <div class="row">
-                <div class="col-md-8 mb-4  mt-3 ">
-                    <h5>Comments:</h5>
-                    <div class="card-body">
-                        {% for comment in comments %}
-                        <div class="p-2 comments">
-                            <p class="font-weight-bold">
-                                {{ comment.author }} |
-                                <span class="font-weight-normal">
-                                    {{ comment.created_on }}
-                                </span> wrote:
-                            </p>
-                            <div id="comment{{ comment.id }}">
-                                {{ comment.body | linebreaks }}
-                                <p>---------------------------</p>
-                            </div>
-                            {% if user.is_authenticated and comment.author == user %}
-                            <button class="btn btn-secondary btn-sm btn-edit"
-                                comment_id="{{ comment.id }}">Edit</button>
-                            <button class="btn  btn-danger btn-sm btn-delete"
-                                comment_id="{{ comment.id }}">Delete</button>
-                            {% endif %}
-                        </div>
-                        <!-- Our for loop ends here -->
-                        {% endfor %}
+                <p class="alert alert-info" role="alert"><em>Difficulty level:</em>
+                    {{ pattern.get_difficulty_level_display }}
+                    <br><em>Needle size:</em> {{pattern.needle_size}}
+                    <br><em>Yarn:</em> {{pattern.yarn}}
+                    <br><em>Gauge:</em> {{pattern.gauge}}
+                </p>
+                <p class="card-text text-start">{{pattern.description}}</p>
+                <div class="row">
+                    <div class="add_to_project_list col px-4 mb-4 mt-3">
+                        {% if user.is_authenticated %}
+                        {% if pattern in user.projectlist.patterns.all %}
+                        <p>Already in your project list</p>
+                        {% else %}
+                        <form action="{% url 'add_to_project_list' slug=pattern.slug %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-info">Add to Project List</button>
+                        </form>
+                        {% endif %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Creating New Comments -->
+    <div class="col mb-4 mt-3">
+        <div>
+            {% if user.is_authenticated %}
+            <h5>Leave a comment:</h5>
+            <p>Posting as: {{ user.username }}</p>
+            <form id="commentForm" method="post" style="margin-top: 1.3em;">
+                {{ comment_form | crispy }}
+                {% csrf_token %}
+                <button id="submitButton" type="submit" class="btn btn-success btn-sm">Submit</button>
+            </form>
+            {% else %}
+            <p>Log in to leave a comment</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Displaying Comments -->
+    <div class="row">
+        <div class="col-md-8 mb-4  mt-3 ">
+            <h5>Comments:</h5>
+            <div>
+                {% for comment in comments %}
+                <div class="p-2 comments">
+                    <p class="font-weight-bold">
+                        {{ comment.author }} |
+                        <span class="font-weight-normal">
+                            {{ comment.created_on }}
+                        </span> wrote:
+                    </p>
+                    <div id="comment{{ comment.id }}">
+                        {{ comment.body | linebreaks }}
+                        <p>---------------------------</p>
+                    </div>
+                    {% if user.is_authenticated and comment.author == user %}
+                    <button class="btn btn-secondary btn-sm btn-edit" comment_id="{{ comment.id }}">Edit</button>
+                    <button class="btn  btn-danger btn-sm btn-delete" comment_id="{{ comment.id }}">Delete</button>
+                    {% endif %}
+                </div>
+                <!-- Our for loop ends here -->
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
+</div>
+
 
 
 <!-- Delete confirmation modal -->
