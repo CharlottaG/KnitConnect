@@ -27,18 +27,22 @@
             </div>
 
             <!-- Liking pattern -->
+            <div class="row">
             <div class="liking_pattern col px-4 mb-4 mt-3">
+                
                 {% if user.is_authenticated %}
-                {% if request.user in pattern.likes.all %}
-                <a href="{% url 'like_pattern' slug=pattern.slug %}">Unlike</a>
-                {% else %}
-                <a href="{% url 'like_pattern' slug=pattern.slug %}">Like</a>
-                {% endif %}
-                {% endif %}
-                <div><i class="fa-solid fa-thumbs-up"></i>{{ like_count }}</div>
-            </div>
+                    {% if request.user in pattern.likes.all %}
+                        <a href="{% url 'like_pattern' slug=pattern.slug %}">Unlike</a>
+                    {% else %}
+                        <a href="{% url 'like_pattern' slug=pattern.slug %}">Like</a>
+                    {% endif %}
 
-            <div class="border p-3" id="comments">
+                {% endif %}
+                <div><i class="fa-solid fa-thumbs-up"></i> {{ pattern.likes.count }}</div>
+            </div>
+        </div>
+
+
                 <!-- Creating New Comments -->
                 <div class="col mb-4 mt-3">
                     <div class="card-body">

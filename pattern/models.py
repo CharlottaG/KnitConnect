@@ -29,8 +29,18 @@ class Pattern(models.Model):
     def __str__(self):
         return f"{self.pattern_name} | by {self.created_by}"
 
-       
+    def like(self, user):
+        if user not in self.likes.all():
+            self.likes.add(user)
 
+    def unlike(self, user):
+        if user in self.likes.all():
+            self.likes.remove(user)
+
+    def like_count(self):
+        return self.likes.count()
+
+       
 class Comment(models.Model):
     pattern = models.ForeignKey(Pattern, on_delete=models.CASCADE,
                              related_name="comments")
@@ -44,11 +54,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment {self.body} by {self.author}"
-
-
-class Like(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    pattern = models.ForeignKey(Pattern, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-

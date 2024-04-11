@@ -1,14 +1,17 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.views.decorators.http import require_POST
 from django.views import generic
 from django.views.generic.detail import DetailView
 from django.views.generic import TemplateView, View
-from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
-from .models import Pattern, Comment, Like
-from .forms import CommentForm, PatternForm
 from django.forms import ModelForm
 from django.utils.text import slugify
+from django.http import JsonResponse
+from .models import Pattern, Comment
+from .forms import CommentForm, PatternForm
+
 
 
 class PatternList(generic.ListView):
@@ -103,8 +106,6 @@ def add_pattern(request):
             return redirect('patterns')
         
     else:
-        # Form is invalid; display error messages
-        messages.error(request, 'Please correct the errors in the form.')
         pattern_form = PatternForm()
     
     return render(request, "pattern/add_pattern.html", {'pattern_form': pattern_form})
@@ -113,11 +114,21 @@ def add_pattern(request):
 @login_required
 def like_pattern(request, slug):
     pattern = get_object_or_404(Pattern, slug=slug)
-    like, created = Like.objects.get_or_create(user=request.user, pattern=pattern)
 
-    if created:
-        messages.success(request, "You've liked this pattern.")
+    if pattern.likes.filter(id=request.user.id).exists():
+        pattern.likes.remove(request.user)
+        messages.add_message(
+            request, messages.ERROR, "Didn't like the pattern? Well, there are other nice patterns!")
     else:
-        messages.error(request, "You've already liked this pattern.")
-    
-        return redirect('pattern_details', slug=slug)
+        pattern.likes.add(request.user)
+        messages.add_message(
+            request, messages.SUCCESS, 'We too like this pattern!')
+
+    return HttpResponseRedirect(reverse('pattern_details', args=[slug]))
+
+
+#@login_required
+#def liked_patterns(request):
+#    liked_patterns = Like.objects.filter(user=request.user).values_list('pattern', flat=True)
+#    patterns = Pattern.objects.filter(id__in=liked_patterns)
+#    return render(request, 'pattern/my_page.html', {'patterns': patterns})
