@@ -39,7 +39,7 @@ class Pattern(models.Model):
 
     def like_count(self):
         return self.likes.count()
-
+    
        
 class Comment(models.Model):
     pattern = models.ForeignKey(Pattern, on_delete=models.CASCADE,

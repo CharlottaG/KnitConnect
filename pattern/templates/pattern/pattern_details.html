@@ -17,7 +17,7 @@
                     <h5 class="card-title">{{pattern.pattern_name}} | <small class="text-body-secondary">by
                             {{pattern.created_by}}</small></h5>
                     <p class="card-text">{{pattern.description}}</p>
-                    <p class="card-text"><em>Difficulity level:</em> {{pattern.difficulity_level}}
+                    <p class="card-text"><em>Difficulity level:</em> {{ pattern.get_difficulity_level_display }}
                         <br><em>Needle size:</em> {{pattern.needle_size}}
                         <br><em>Yarn:</em> {{pattern.yarn}}
                         <br><em>Gauge:</em> {{pattern.gauge}}
