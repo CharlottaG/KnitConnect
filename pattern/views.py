@@ -126,12 +126,19 @@ def like_pattern(request, slug):
 def my_page(request):
     user = request.user
     pattern_names = get_liked_pattern_names(user)
-    return render(request, 'pattern/my_page.html', {'pattern_names': pattern_names})
+    my_patterns = get_pattern_created_by(user)
+    return render(request, 'pattern/my_page.html', {'pattern_names': pattern_names, 'my_patterns': my_patterns})
 
 def get_liked_pattern_names(user):
     liked_patterns = Pattern.objects.filter(likes=user)
     pattern_names_and_slugs = [(pattern.pattern_name, pattern.slug) for pattern in liked_patterns]
     return pattern_names_and_slugs
+
+def get_pattern_created_by(user):
+    my_patterns = Pattern.objects.filter(created_by=user)
+    pattern_names_and_slugs = [(pattern.pattern_name, pattern.slug) for pattern in my_patterns]
+    return pattern_names_and_slugs
+
     
     
     
