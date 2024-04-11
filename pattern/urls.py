@@ -14,4 +14,3 @@ urlpatterns = [
     path('pattern/<slug:slug>/like/', views.like_pattern, name='like_pattern'),
     path('pattern/<slug:slug>/add-to-project/', views.add_to_project_list, name='add_to_project_list'),
 ]
-

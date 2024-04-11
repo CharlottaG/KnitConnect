@@ -7,37 +7,25 @@
 <!-- pattern_details.html content starts here -->
 <div class="container px-4 py-5 cols-2">
     <div class="card mb-3" style="max-width: 540px;">
-
-        <!-- Displaying pattern -->
-
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src=" {{ pattern.featured_image.url }}" alt="{{ pattern.pattern_name }}"
-                            class="img-fluid rounded-start">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{pattern.pattern_name}} | <small class="text-body-secondary">by
-                                    {{pattern.created_by}}</small></h5>
-                            <p class="card-text">{{pattern.description}}</p>
-                            <p class="card-text"><em>Difficulty level:</em> {{ pattern.get_difficulty_level_display }}
-                                <br><em>Needle size:</em> {{pattern.needle_size}}
-                                <br><em>Yarn:</em> {{pattern.yarn}}
-                                <br><em>Gauge:</em> {{pattern.gauge}}
-                            </p>
-                        </div>
-                    </div>
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src=" {{ pattern.featured_image.url }}" alt="{{ pattern.pattern_name }}"
+                    class="img-fluid rounded-start">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{pattern.pattern_name}} | <small class="text-body-secondary">by
+                            {{pattern.created_by}}</small></h5>
+                    <p class="card-text">{{pattern.description}}</p>
+                    <p class="card-text"><em>Difficulty level:</em> {{ pattern.get_difficulty_level_display }}
+                        <br><em>Needle size:</em> {{pattern.needle_size}}
+                        <br><em>Yarn:</em> {{pattern.yarn}}
+                        <br><em>Gauge:</em> {{pattern.gauge}}
+                    </p>
+                    <p class="card-text"><a href="#">Download PDF</a></p>
                 </div>
+            </div>
 
-        <!--- Edit/Delet buttons  -->
-        <div>         
-                {% if user.is_authenticated and pattern.creator == user %}
-                <button class="btn btn-secondary btn-sm btn-edit"
-                    pattern_slug="{{ pattern.slug }}">Edit</button>
-                <button class="btn btn-danger btn-sm btn-delete"
-                    pattern_slug="{{ pattern.slug }}">Delete</button>
-                {% endif %}
-        </div>
             <!-- Liking pattern -->
             <div class="row">
                 <div class="liking_pattern col px-4 mb-4 mt-3">

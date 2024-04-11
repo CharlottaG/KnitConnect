@@ -7,7 +7,7 @@ from .models import Pattern, Comment
 class PatternForm(forms.ModelForm):
     class Meta:
         model = Pattern
-        fields = ['pattern_name', 'description', 'featured_image', 'pattern_pdf', 'difficulty_level', 'needle_size', 'yarn', 'gauge']
+        fields = ['pattern_name', 'description', 'featured_image', 'difficulty_level', 'needle_size', 'yarn', 'gauge']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
