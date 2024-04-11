@@ -15,7 +15,8 @@ class Pattern(models.Model):
     needle_size = models.CharField(max_length=100)
     gauge = models.CharField(max_length=100)
     yarn = models.CharField(max_length=100, default="yarn")
-    difficulity_level = models.IntegerField(choices=LEVEL,)
+    difficulty_level = models.IntegerField(choices=LEVEL,)
+    pattern_pdf = CloudinaryField('pattern', blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(User, related_name='liked_patterns', blank=True)
 
