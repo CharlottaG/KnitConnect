@@ -7,13 +7,20 @@ from .models import Pattern, Comment
 class PatternForm(forms.ModelForm):
     class Meta:
         model = Pattern
-        fields = ['pattern_name', 'description', 'featured_image', 'difficulty_level', 'needle_size', 'yarn', 'gauge']
-
+        fields = [
+            'pattern_name',
+            'description',
+            'featured_image',
+            'difficulty_level',
+            'needle_size',
+            'yarn',
+            'gauge'
+            ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.helper = FormHelper()  
-        self.helper.form_method = 'post' 
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Save'))
 
 
@@ -21,5 +28,3 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('body',)
-
-
