@@ -19,7 +19,7 @@
 
 /** Background image on pattern overview page**/
 .darkened-img {
-        background-image: linear-gradient(rgba(10, 78, 96, 0.5), rgba(0, 0, 0, 0.5)), url('image.jpg');
+        background-image: linear-gradient(rgba(10, 78, 96, 0.5), rgba(0, 0, 0, 0.5));
 }
 
 /** Footer **/

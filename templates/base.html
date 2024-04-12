@@ -28,7 +28,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'index' %}">The Knit Nook</a>
+      <a class="navbar-brand" href="{% url 'index' %}">The Knit Connect</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -59,10 +59,6 @@
             <a class="nav-link" href="{% url 'patterns' %}">Patterns</a>
           </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
       </div>
     </div>
   </nav>
@@ -95,26 +91,13 @@
   </main>
 
   <!-- Footer -->
-  <<footer>
+  <footer>
     <div class="container py-3 my-4 border-top">
         <div class="row">
             <div class="col-md-4 mb-3 mb-md-0 text-center text-md-start">
-                <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-                    <svg class="bi" width="30" height="24">
-                        <use xlink:href="#bootstrap" />
-                    </svg>
-                </a>
-                <span class="mb-3 mb-md-0 text-body-secondary">© 2024 The Knit Connect | Designed by Charlotta</span>
+                <span class="mb-3 mb-md-0 text-body-secondary">© 2024 The Knit Connect | Designed by Charlotta  
+                  <br><a href="mailto:email@example.com?subject=Mail from The Knit Connect" target="_blank">Send Email</a></span>
             </div>
-
-            <ul class="nav col-md-4 justify-content-center justify-content-md-end list-unstyled d-flex">
-                <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#instagram" />
-                        </svg></a></li>
-                <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#facebook" />
-                        </svg></a></li>
-            </ul>
         </div>
     </div>
 </footer>

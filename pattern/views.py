@@ -23,13 +23,13 @@ class PatternList(generic.ListView):
 
 #@login_required
 def pattern_details(request, slug):
-    pattern = get_object_or_404(Pattern, slug=slug)
-    comments = Comment.objects.filter(pattern=pattern).order_by("-created_on")
+    pattern = get_object_or_404(Pattern, slug = slug)
+    comments = Comment.objects.filter(pattern = pattern).order_by("-created_on")
 
     if request.method == "POST":
-        comment_form = CommentForm(data=request.POST)
+        comment_form = CommentForm(data = request.POST)
         if comment_form.is_valid():
-            comment = comment_form.save(commit=False)
+            comment = comment_form.save(commit = False)
             comment.author = request.user
             comment.pattern = pattern
             comment.save()
@@ -60,9 +60,9 @@ def comment_edit(request, slug, comment_id):
 
     if request.method == "POST":
 
-        post = get_object_or_404(Pattern, slug=slug)
-        comment = get_object_or_404(Comment, pk=comment_id)
-        comment_form = CommentForm(data=request.POST, instance=comment)
+        post = get_object_or_404(Pattern, slug = slug)
+        comment = get_object_or_404(Comment, pk = comment_id)
+        comment_form = CommentForm(data = request.POST, instance = comment)
 
         if comment_form.is_valid() and comment.author == request.user:
             comment = comment_form.save(commit=False)
@@ -73,13 +73,13 @@ def comment_edit(request, slug, comment_id):
             messages.add_message(request, messages.ERROR,
                                  'Error updating comment!')
 
-    return HttpResponseRedirect(reverse('pattern_details', args=[slug]))
+    return HttpResponseRedirect(reverse('pattern_details', args = [slug]))
 
 
 @login_required
 def comment_delete(request, slug, comment_id):
-    post = get_object_or_404(Pattern, slug=slug)
-    comment = get_object_or_404(Comment, pk=comment_id)
+    post = get_object_or_404(Pattern, slug = slug)
+    comment = get_object_or_404(Comment, pk = comment_id)
 
     if comment.author == request.user:
         comment.delete()
@@ -88,7 +88,7 @@ def comment_delete(request, slug, comment_id):
         messages.add_message(request, messages.ERROR,
                              'You can only delete your own comments!')
 
-    return HttpResponseRedirect(reverse('pattern_details', args=[slug]))
+    return HttpResponseRedirect(reverse('pattern_details', args = [slug]))
 
 
 @login_required
@@ -96,7 +96,7 @@ def add_pattern(request):
     if request.method == "POST":
         pattern_form = PatternForm(request.POST, request.FILES)
         if pattern_form.is_valid():
-            pattern = pattern_form.save(commit=False)
+            pattern = pattern_form.save(commit = False)
             pattern.created_by = request.user
             pattern.slug = slugify(pattern.pattern_name)
             pattern.save()
@@ -111,14 +111,14 @@ def add_pattern(request):
 
 @login_required
 def like_pattern(request, slug):
-    pattern = get_object_or_404(Pattern, slug=slug)
+    pattern = get_object_or_404(Pattern, slug = slug)
 
     if pattern.created_by == request.user:
         messages.add_message(
             request, messages.ERROR, "You can't like your own pattern!")
     else:
 
-        if pattern.likes.filter(id=request.user.id).exists():
+        if pattern.likes.filter(id = request.user.id).exists():
             pattern.likes.remove(request.user)
             messages.add_message(
             request, messages.ERROR, "Didn't like the pattern? Well, there are other nice patterns!")
@@ -127,7 +127,7 @@ def like_pattern(request, slug):
             messages.add_message(
                 request, messages.SUCCESS, 'We too like this pattern!')
 
-    return HttpResponseRedirect(reverse('pattern_details', args=[slug]))
+    return HttpResponseRedirect(reverse('pattern_details', args = [slug]))
 
 
 @login_required
@@ -161,19 +161,19 @@ def my_page(request):
 
 
 def get_liked_pattern_names(user):
-    liked_patterns = Pattern.objects.filter(likes=user)
+    liked_patterns = Pattern.objects.filter(likes = user)
     pattern_names_and_slugs = [(pattern.pattern_name, pattern.slug) for pattern in liked_patterns]
     return pattern_names_and_slugs
 
 
 def get_pattern_created_by(user):
-    my_patterns = Pattern.objects.filter(created_by=user)
+    my_patterns = Pattern.objects.filter(created_by = user)
     pattern_names_and_slugs = [(pattern.pattern_name, pattern.slug) for pattern in my_patterns]
     return pattern_names_and_slugs
 
 
 def get_added_to_list(user):
-    project_list = ProjectList.objects.filter(user=user).first()
+    project_list = ProjectList.objects.filter(user = user).first()
     if project_list:
         pattern_names_and_slugs = [(pattern.pattern_name, pattern.slug) for pattern in project_list.patterns.all()]
         return pattern_names_and_slugs

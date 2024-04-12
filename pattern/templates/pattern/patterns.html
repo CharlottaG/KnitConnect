@@ -2,6 +2,11 @@
 {% load static %}
 
 {% block content %}
+<style>
+    .darkened-img {
+        background-image: linear-gradient(rgba(10, 78, 96, 0.5), rgba(0, 0, 0, 0.5));
+    }
+</style>
 
 <!-- Content starts here -->
 <div class="container px-4 py-5" id="custom-cards">
@@ -17,28 +22,29 @@
                     <div class="d-flex"><i class="fa-solid fa-thumbs-up"></i>{{ pattern.like_count }}</div>
                     <h3 class="pt-5 mt-5 display-7 lh-1 fw-bold">{{ pattern.pattern_name }}</h3>
                     <h4 class="mb-4">by {{ pattern.created_by }}</h4>
-                    
+
                     <ul class="d-flex list-unstyled mt-auto">
                         <li class="d-flex align-items-center me-3">
                             <small><strong>Difficulty level:
-                                <br>
-                            </strong> {{ pattern.get_difficulty_level_display }}</small>
+                                    <br>
+                                </strong> {{ pattern.get_difficulty_level_display }}</small>
                         </li>
                         <li class="d-flex align-items-center me-3">
                             <small><strong>Gauge:
-                                <br>
-                            </strong> {{ pattern.gauge }}</small>
+                                    <br>
+                                </strong> {{ pattern.gauge }}</small>
                         </li>
                         <li class="d-flex align-items-center me-3">
                             <small><strong>Needle size:
-                                <br>
-                            </strong> {{ pattern.needle_size }}</small>
+                                    <br>
+                                </strong> {{ pattern.needle_size }}</small>
                         </li>
                     </ul>
                     <ul class="d-flex list-unstyled mt-auto">
                         <li class="d-flex align-items-center">
                             {% if pattern.slug %}
-                            <small><a href="{% url 'pattern_details' slug=pattern.slug %}" class="link-info">View pattern</a></small>
+                            <small><a href="{% url 'pattern_details' slug=pattern.slug %}" class="link-info">View
+                                    pattern</a></small>
                             {% endif %}
                         </li>
                     </ul>
