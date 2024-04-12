@@ -16,6 +16,10 @@ import dj_database_url
 if os.path.isfile('env.py'):
     import env
 
+# Set the CLOUDINARY_URL environment variable
+CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
