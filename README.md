@@ -50,7 +50,12 @@ Go to https://theknitconnect-456a7f14d941.herokuapp.com/ in your browser to see 
 
 
 ## Relationship diagram
+![image](https://github.com/CharlottaG/KnitConnect/assets/138576943/0b155a12-93de-4021-a3d7-a4e4d6be4156)
 
+- Each "User" can create multiple "Patterns"
+- Each "Pattern" can have multiple "Comments"
+- "Comment" is associated with a "Pattern" through a foreign key relationship
+- Each "User" can have multiple "Patterns" in their "ProjectList", and each "Pattern" can belong to multiple "ProjectLists"
 
 ## Pages
 ### The Knit Connect/Home
@@ -91,8 +96,14 @@ Logged in users can add patterns to a list of patterns they would like to knit i
 ### Messages
 The app use message functionality to let the user know what happens in the background, such as successfully adding a pattern or comment, liking/unlinking a pattern and adding a pattern to their project list.
 
-## Deployment
 
+## Deployment Process to Heroku
+- Create Heroku App
+- Set up of necessary environment variables or configuration settings for the application.
+- Deployment the application to Heroku using Git. This involves pushing the code to the Heroku remote repository. 
+- Heroku will then build the application using the specified buildpack and dependencies. 
+- Once the build process is complete, URL can be used to access and interact with the deployed application.
+  
 ## Testing
 ### Manual testing:
 #### Links:	
