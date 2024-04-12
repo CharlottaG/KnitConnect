@@ -47,6 +47,21 @@ To run the project locally, follow these steps:
 Go to https://theknitconnect-456a7f14d941.herokuapp.com/ in your browser to see The Knit Connect in action.
 
 ## User Stories
+**Must have:**
+- As a user, I want to sign up for an account on the app so that I can access its features and connect with other users.
+- As a user, I want to log in to my account securely to access my saved patterns, project lists, and other personalized content.
+- As a user, I want to be able to create and upload my own knitting patterns to share with the community.
+- As a user, I want to view detailed information about each knitting pattern, including materials needed, gauge, and instructions.
+- As a user, I want to be able to add knitting patterns to my project list for future reference and organization.
+- As a user, I want to be able to leave comments on knitting patterns to share my experiences and feedback with other users.
+- As a user, I want to be able to mark patterns as favorites for easy access and reference.
+
+**Out of scope – for future development:**
+- As a user, I want to be able to follow other users and see updates on their latest projects and patterns.
+- As a user, I want to be able to search for knitting patterns based on categories such as type (e.g., sweaters, socks), difficulty level, and yarn weight.
+- As a user, I want to be able to categorize yarns based on attributes such as fiber content, color, and brand.
+- As a user, I want to be able to receive notifications for new patterns, comments on my patterns, and updates from users I follow.
+- As a user, I want to be able to search for yarns based on categories and add them to my stash for tracking purposes.
 
 
 ## Relationship diagram
