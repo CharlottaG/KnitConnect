@@ -13,7 +13,8 @@
             <ul>
                 {% for pattern_name, pattern_slug in pattern_names %}
                 <li>
-                <strong><a href="{% url 'pattern_details' slug=pattern_slug %}" class="link-dark">{{ pattern_name }}</a></strong>
+                    <strong><a href="{% url 'pattern_details' slug=pattern_slug %}"
+                            class="link-dark">{{ pattern_name }}</a></strong>
                 </li>
                 {% endfor %}
             </ul>
@@ -23,22 +24,24 @@
             <ul>
                 {% for pattern_name, pattern_slug in my_patterns %}
                 <li>
-                    <strong><a href="{% url 'pattern_details' slug=pattern_slug %}" class="link-dark">{{ pattern_name }}</a></strong>
+                    <strong><a href="{% url 'pattern_details' slug=pattern_slug %}"
+                            class="link-dark">{{ pattern_name }}</a></strong>
                 </li>
                 {% endfor %}
             </ul>
         </div>
         <div class="pattern-list patterns-to-knit">
             <h4>What I will knit:</h4>
-                {% if project_patterns %}
-                <ul>
-                    {% for pattern_name, slug in project_patterns %}
-                    <li><strong><a href="{% url 'pattern_details' slug=slug %}" class="link-dark">{{ pattern_name }}</a></strong></li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                <p>No patterns in your project list yet.</p>
-                {% endif %}
+            {% if project_patterns %}
+            <ul>
+                {% for pattern_name, slug in project_patterns %}
+                <li><strong><a href="{% url 'pattern_details' slug=slug %}"
+                            class="link-dark">{{ pattern_name }}</a></strong></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No patterns in your project list yet.</p>
+            {% endif %}
         </div>
     </div>
 </div>

@@ -28,7 +28,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['8000-charlottag-knitconnect-8t6pt4tnrxh.ws-eu110.gitpod.io', '.herokuapp.com']
 
@@ -156,14 +156,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Cloudinary settings
-CLOUDINARY = {
-    'cloud_name': 'dehwhmatn',
-    'api_key': '663763923361872',
-    'api_secret': 'evtNL0mvCIay6Z44jbyw7X43hQk',
-}
+
