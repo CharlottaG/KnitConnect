@@ -1,110 +1,125 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# The Knit Connect
+![image](https://github.com/CharlottaG/KnitConnect/assets/138576943/d3f1d092-19e0-4550-a2c7-6432326e40a0)
 
-Welcome Charlotta Grundmann,
+[The Knit Connect](https://theknitconnect-456a7f14d941.herokuapp.com/)
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+## Purpose and Idea:
+The Knit Connect is an app designed to create a vibrant and inclusive community for passionate knitters. Its main objectives are:
+1.	Centralized Platform: The app provides a centralized platform where knitters of all skill levels can come together. It serves as a hub for sharing patterns, ideas, and experiences related to knitting.
+2.	Creativity and Collaboration: “The Knit Connect” fosters creativity by allowing users to showcase their designs, explore new patterns, and collaborate with fellow enthusiasts. Whether you’re a seasoned knitter or a beginner, the app encourages creativity and learning.
+3.	User-Friendly Interface: The app prioritizes ease of use. Its intuitive design ensures that even beginners can navigate and participate in the knitting community effortlessly.
+4.	Meaningful Connections: By connecting knitters worldwide, “The Knit Connect” aims to build camaraderie and meaningful relationships. Users can learn from each other, seek inspiration, and share their passion for knitting.
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+## User Demographic:
+The Knit Connect caters to a diverse group of users:
+1.	Knitting Enthusiasts: Passionate knitters of all ages and backgrounds who want to connect with like-minded individuals, share their work, and learn from others.
+2.	Beginners: Novice knitters seeking inspiration, guidance, and tutorials. The app provides a supportive environment for learning and improving knitting skills.
+3.	Experienced Knitters: Seasoned knitters who want to showcase their designs, collaborate with others, and stay updated on the latest trends.
+4.	Community Builders: Individuals interested in fostering a positive and encouraging knitting community. They contribute by sharing knowledge, organizing events, and supporting fellow users.
 
-## Gitpod Reminders
+## Technologies Used
+- HTML
+- CSS
+- Boostrap Framework CSS
+- JavaScript
+- Django Framework
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+## Tools
+- Github – code repository
+- Gitpod – cloud-based development environment
+- Cloudinary – cloud storage for images
+- ElefantSQL – postgres database
 
-`python3 -m http.server`
+## Installation
+To run the project locally, follow these steps:
+1. Clone this repository to your local machine.
+- git clone https://gitpod.com/charlottag/theknitconnect.git
+2. Install Django and other dependencies.
+- pip install django
+3. Run migrations to create the database.
+- python manage.py makemigrations
+- python manage.py migrate
+4. Create a superuser to manage the website.
+- python manage.py createsuperuser
+5. Start the server.
+- python manage.py runserver
 
-A blue button should appear to click: _Make Public_,
+Go to https://theknitconnect-456a7f14d941.herokuapp.com/ in your browser to see The Knit Connect in action.
 
-Another blue button should appear to click: _Open Browser_.
+## User Stories
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
 
-A blue button should appear to click: _Make Public_,
+## Relationship diagram
 
-Another blue button should appear to click: _Open Browser_.
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+## Pages
+### The Knit Connect/Home
+This is the home page, with a short introduction to the application.
 
-To log into the Heroku toolbelt CLI:
+### My page
+This is the user’s own page, with lists of liked patterns, their own created patterns and patterns they want to knit. This page will evolve with more features in the future, things like yarn stash and needle range.
+![image](https://github.com/CharlottaG/KnitConnect/assets/138576943/1449f1ba-b883-498b-8fce-53edb53df660)
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+### Patterns
+This page contains all patterns added by the users with an image and the key facts that a user would look for, like level of difficulty, needle size and knitting gauge and a link to the actual pattern instructions.
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+### Pattern details
+This is where the pattern instructions come, and where you can like the pattern, add it to you projects and also leave comments.
 
-------
+## Features & functionalities
+### Account Management
+Users can register for an account, sign-in or logout. All content except the home page is only available for logged-in users.
 
-## Release History
+### Admin management
+As a superuser you have access to the admin panel accessing the app from backend. The superuser can add and delete users, patterns and comments, as well as publish and unpublish patterns.
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+### Navigation Bar
+From the navigation bar you can access patterns and the user’s own page.
 
-**September 20 2023:** Update Python version to 3.9.17.
+### Patterns
+Patterns is an app within the project. Logged in users can view other users’ patterns as well as add their own patterns. They can like patterns and view them as a list in their profile page. They can also add patterns to their list of projects, things they’d like to knit.
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+### Comments
+Logged in users can comment on patterns and share their thoughts or ask questions to the pattern creator.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+### Likes
+Logged in users can like patterns and those will automatically be added to a list of liked patterns on the user’s own page.
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+### Add to projects
+Logged in users can add patterns to a list of patterns they would like to knit in the future, which is featured on the user’s own page.
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+### Messages
+The app use message functionality to let the user know what happens in the background, such as successfully adding a pattern or comment, liking/unlinking a pattern and adding a pattern to their project list.
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+## Deployment
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+## Testing
+### Manual testing:
+#### Links:	
+- The Knit Connect – Home/Index page
+- Register – that this takes the user to a registration page, and that it works to register
+- Login - that this takes the user to a login page, and it works to login
+- Logout - that this logs the user out, and that the user get a question if they want to do so. And that this link only shows when users are logged in.
+- My page - That this link only shows when users are logged in and takes the user to a page with lists populated by the logged in user’s activity.
+- Pattern – that this takes you to a page with patterns, and that the view details links take you to a detailed view of the pattern with instructions.
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+#### Functionality:
+- Liking/Unliking a pattern – that it adds to the likes count shown at the side of the thumbs up icon, that it gets populated at the user’s page, and the liked patterns list. That the logged in user can’t like their own patterns.
+- Add to project – that it gets added to the list of projects to knit at the user’s page.
+- Commenting – that the logged in user can leave a comment on a pattern, and also edit or delete it.
+- Messages – that all the actions the user takes to send information to the database is being visualized as notifications at the top of the page.
+- Add pattern – that the form works, that the user can upload images and add texts in all fields to add a pattern, with validation to ensure unique values for pattern names.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+## Future development:
+I decided to create two apps in my project, one for patterns and one for users. The reason is that I want to develop the user app with more content related to the user such as creating a more complex user profile with more features, and potentially add different types of users with different levels of access to the content and functionality within The Knit Connect application. Other features that I’m thinking of include is a calculator for different knitting parameters, useful for knitters in their project plannings.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+## Credits
+I have referenced the CodeInstitute course content for I Think Therefor I Blog. I have also used google to find how to do different functions. Some are:
+- https://stackoverflow.com/questions/63960326/django-no-file-chosen-in-fileinput
+- https://docs.djangoproject.com/en/5.0/
+- https://getbootstrap.com/docs/5.0/ 
+- https://www.w3schools.com/django/
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+## Acknowledgment
+I want to express my gratitude to Luke Buchanan for guiding me during this project and offering support and advice to help me overcome challenges and make progress.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
-
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
-
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
-
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
-
-------
-
-## FAQ about the uptime script
-
-**Why have you added this script?**
-
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
-
-**How will this affect me?**
-
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
-
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
-
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
-
-**So….?**
-
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
-
-**Can I opt out?**
-
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
-
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
-
-**Anything more?**
-
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
-
----
-
-Happy coding!
