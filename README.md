@@ -149,6 +149,9 @@ I decided to create two apps in my project, one for patterns and one for users. 
 ### CI Python Linter
 ![image](https://github.com/CharlottaG/KnitConnect/assets/138576943/3ccbfee7-c070-4a5d-b744-1b3cc074df10)
 
+### Lighthouse
+![image](https://github.com/CharlottaG/KnitConnect/assets/138576943/f4b7c152-2fec-42f6-bfaa-c1894d3634bc)
+
 
 ## Credits
 I have referenced the CodeInstitute course content for I Think Therefor I Blog. I have also used google to find how to do different functions. Some are:
