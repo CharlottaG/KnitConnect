@@ -139,6 +139,14 @@ The app use message functionality to let the user know what happens in the backg
 ## Future development:
 I decided to create two apps in my project, one for patterns and one for users. The reason is that I want to develop the user app with more content related to the user such as creating a more complex user profile with more features, and potentially add different types of users with different levels of access to the content and functionality within The Knit Connect application. Other features that I’m thinking of include is a calculator for different knitting parameters, useful for knitters in their project plannings.
 
+## Validation
+### The W3C Markup validation service
+![image](https://github.com/CharlottaG/KnitConnect/assets/138576943/f065082b-a720-45eb-89cd-32c8669e11bc)
+
+### CI Python Linter
+![image](https://github.com/CharlottaG/KnitConnect/assets/138576943/3ccbfee7-c070-4a5d-b744-1b3cc074df10)
+
+
 ## Credits
 I have referenced the CodeInstitute course content for I Think Therefor I Blog. I have also used google to find how to do different functions. Some are:
 - https://stackoverflow.com/questions/63960326/django-no-file-chosen-in-fileinput
