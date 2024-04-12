@@ -82,9 +82,12 @@ This is the user’s own page, with lists of liked patterns, their own created p
 
 ### Patterns
 This page contains all patterns added by the users with an image and the key facts that a user would look for, like level of difficulty, needle size and knitting gauge and a link to the actual pattern instructions.
+![image](https://github.com/CharlottaG/KnitConnect/assets/138576943/6ca34eef-aa5c-4d49-b8eb-3b5b4e9821e2)
 
 ### Pattern details
 This is where the pattern instructions come, and where you can like the pattern, add it to you projects and also leave comments.
+![image](https://github.com/CharlottaG/KnitConnect/assets/138576943/53f40b04-d4e4-4c56-b36e-adf7e9a3a383)
+
 
 ## Features & functionalities
 ### Account Management
